@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Activities List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Jquery -->
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">       
+    <script>
+      function loadActivity(td) {
+         id = $(td).attr('activityID');
+         window.open(
+            "CreateActivityView?id="+encodeURI(id),"_self");
+      }
+      function deleteActivity(td) {
+        id = $(td).attr('activityID');
+        window.open(
+            "DeleteActivity?id="+encodeURI(id),"_self");
+      }
+   </script> 
+  </head>
+ 
+  <body style="margin: 20px;">
+    <h2 style="text-align:center">Core API - Python Sample</h2>
+    <h4 style="text-align:center" title="Company">{{ userInfo.company }}</h4>
+    <div style="text-align:center">
+      <form action = "disconnectFromCore" method = "post">
+            <input type="submit" class="btn btn-danger" name="btnDisconnectFromCore" id="btnDisconnectFromCore" value="Disconnect from Core" />
+      </form>
+    </div>
+    <div style="text-align:right">
+      <a href="CreateActivityView" class="btn btn-primary" role="button">Create Activity</a>   
+    </div>
+    <h3>Activities List</h3>
+    <table style="margin:20 0 20 0" class="table table-striped">
+      <thead style="background: #000; color: #fff">
+         <th>Code</th>
+         <th>Description</th>
+         <th>Billable</th>
+         <th>Bill Rate</th>
+         <th>Cost Rate</th> 
+         <th></th>                  
+      </thead>
+      {% for activity in activityList %}
+        <tr style="cursor:pointer">
+          <td activityID = "{{ activity.id }}" onclick=loadActivity(this)>{{ activity.code }}</td>                
+          <td activityID = "{{ activity.id }}" onclick=loadActivity(this)>{{ activity.description }}</td>
+          <td activityID = "{{ activity.id }}" onclick=loadActivity(this)>{{ "true" if activity.billable == 1 else "false" }}</td>
+          <td activityID = "{{ activity.id }}" onclick=loadActivity(this)>{{ activity.billRate }}</td>
+          <td activityID = "{{ activity.id }}" onclick=loadActivity(this)>{{ activity.costRate }}</td>
+          <td activityID = "{{ activity.id }}" onclick=deleteActivity(this)>Delete</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>

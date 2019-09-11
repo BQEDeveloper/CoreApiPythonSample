@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Create Activity</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Jquery -->
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+</head>
+<body style="margin: 20px;">
+  <a href="/" class="col-sm-10 col-sm-offset-2">Back to List</a>
+  <form class="form-horizontal" method="post" style="padding-top: 50px;" action="SubmitActivity">
+    <div class="form-group">
+      <label class="control-label col-sm-2" >Code: *</label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control" name="code" placeholder="Enter code" required value="{{ activity.code }}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" >Description: *</label>
+      <div class="col-sm-6">          
+        <input type="text" class="form-control" name="description" placeholder="Enter Description" required value="{{ activity.description }}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" >Bill Rate:</label>
+      <div class="col-sm-6">          
+        <input type="text" class="form-control" name="billRate" placeholder="Enter Bill Rate" value="{{ activity.billRate }}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" >Cost Rate:</label>
+      <div class="col-sm-6">          
+        <input type="text" class="form-control" name="costRate" placeholder="Enter Cost Rate" value="{{ activity.costRate }}">
+      </div>
+    </div>
+    <div class="form-group">        
+      <div class="col-sm-offset-2 col-sm-6">
+        <div class="checkbox">
+          <label><input type="checkbox" name="isBillable" {{ "checked" if activity.billable == 1 else "" }} > Billable</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">        
+      <div class="col-sm-offset-2 col-sm-6">
+        <input type="hidden"name="id" value="{{ activity.id }}">
+        <button type="submit" class="btn btn-success" name="submit">Submit</button>
+      </div>
+    </div>
+  </form>
+</body>
+</html>
