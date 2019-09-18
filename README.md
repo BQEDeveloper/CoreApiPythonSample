@@ -7,7 +7,7 @@ A sample app demonstrating OAuth 2.0 and other features using Core API.
   2. Go to Config.ini and insert the client_secret, client_id and redirect_uri of your app. Please note the redirect_uri should point to the index.html file of the project.
   
   #### Note: 
-  The responses during the OAuth process, including access_token, referesh_token, etc., are stored in the AuthResponse.ini file. As a    best practice, you should store it in a database.
+  The responses during the OAuth process, including access_token, referesh_token, etc., are stored in the AuthResponse.ini file. As a best practice, you should protect this information by storing it in a database and use secure methods to access it.
   
  As an example, if you are running Python on your localhost with port 5000, the redirect_uri will look like
  http://127.0.0.1:5000. Note: The redirect_uri of your app should exactly match with the redirect_uri in your config file.
