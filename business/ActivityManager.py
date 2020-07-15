@@ -10,7 +10,6 @@ import pickle
 
 class ActivityManager(object):
 
-    config: None
     authResponse: None
     httpResponse: None
     httpHeader: None
@@ -18,7 +17,6 @@ class ActivityManager(object):
 
     def __init__(self):
         try:
-            ActivityManager.config = GeneralMethods.GetConfig()
 
             ActivityManager.authResponse = AuthResponseModel()
             ActivityManager.httpResponse = HttpResponseModel()
@@ -34,7 +32,7 @@ class ActivityManager(object):
     @classmethod
     def GetList(self):
         try:
-            ActivityManager.httpResponse = APIHelper.Get(ActivityManager.config.CoreAPIBaseUrl + '/activity?page=0,100&orderby=name', ActivityManager.httpHeader)
+            ActivityManager.httpResponse = APIHelper.Get(ActivityManager.authResponse.endpoint + '/activity?page=0,1000&orderby=name', ActivityManager.httpHeader)
 
             if ActivityManager.httpResponse.header_code == 401 : # UnAuthorised
                 ActivityManager.authResponse = ActivityManager.authManager.ReAuthorize()
@@ -56,7 +54,7 @@ class ActivityManager(object):
     @classmethod
     def Get(self, id):
         try:
-            ActivityManager.httpResponse = APIHelper.Get(ActivityManager.config.CoreAPIBaseUrl + '/activity/' + id, ActivityManager.httpHeader)
+            ActivityManager.httpResponse = APIHelper.Get(ActivityManager.authResponse.endpoint + '/activity/' + id, ActivityManager.httpHeader)
 
             if ActivityManager.httpResponse.header_code == 401 : # UnAuthorised
                 ActivityManager.authResponse = ActivityManager.authManager.ReAuthorize()
@@ -74,7 +72,7 @@ class ActivityManager(object):
     @classmethod
     def Create(self, activity):
         try:
-            ActivityManager.httpResponse = APIHelper.Post(ActivityManager.config.CoreAPIBaseUrl + '/activity', json.dumps(activity, default = lambda o: o.__dict__), ActivityManager.httpHeader)
+            ActivityManager.httpResponse = APIHelper.Post(ActivityManager.authResponse.endpoint + '/activity', json.dumps(activity, default = lambda o: o.__dict__), ActivityManager.httpHeader)
 
             if ActivityManager.httpResponse.header_code == 401 : # UnAuthorised
                 ActivityManager.authResponse = ActivityManager.authManager.ReAuthorize()
@@ -91,7 +89,7 @@ class ActivityManager(object):
     @classmethod
     def Update(self, id, activity):
         try:
-            ActivityManager.httpResponse = APIHelper.Put(ActivityManager.config.CoreAPIBaseUrl + '/activity/' + id, json.dumps(activity, default = lambda o: o.__dict__), ActivityManager.httpHeader)
+            ActivityManager.httpResponse = APIHelper.Put(ActivityManager.authResponse.endpoint + '/activity/' + id, json.dumps(activity, default = lambda o: o.__dict__), ActivityManager.httpHeader)
 
             if ActivityManager.httpResponse.header_code == 401 : # UnAuthorised
                 ActivityManager.authResponse = ActivityManager.authManager.ReAuthorize()
@@ -109,7 +107,7 @@ class ActivityManager(object):
     @classmethod
     def Delete(self, id):
         try:
-            ActivityManager.httpResponse = APIHelper.Delete(ActivityManager.config.CoreAPIBaseUrl + '/activity/' + id, ActivityManager.httpHeader)
+            ActivityManager.httpResponse = APIHelper.Delete(ActivityManager.authResponse.endpoint + '/activity/' + id, ActivityManager.httpHeader)
 
             if ActivityManager.httpResponse.header_code == 401 : # UnAuthorised
                 ActivityManager.authResponse = ActivityManager.authManager.ReAuthorize()

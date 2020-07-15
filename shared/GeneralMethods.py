@@ -19,7 +19,6 @@ class GeneralMethods:
 
             config.Scopes = configParser['Scopes']['Scopes']
 
-            config.CoreAPIBaseUrl = configParser['urls']['CoreAPIBaseUrl']
             config.CoreIdentityBaseUrl = configParser['urls']['CoreIdentityBaseUrl']
 
             return config

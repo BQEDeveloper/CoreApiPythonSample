@@ -1,5 +1,4 @@
 class ConfigModel:
-    CoreAPIBaseUrl = None
     CoreIdentityBaseUrl = None
     Secret = None
     ClientID = None
